@@ -9,7 +9,7 @@ public class Member {
   String email;
   String pw;
   String photo;
-  String phoneNum;
+  String tel;
   Date resisteredDate;
   
 }

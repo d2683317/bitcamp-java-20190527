@@ -22,7 +22,7 @@ public class App2 {
       member.email = getStringValue("이메일? ");
       member.pw = getStringValue("암호? ");
       member.photo = getStringValue("사진? ");
-      member.phoneNum = getStringValue("전화? ");
+      member.tel = getStringValue("전화? ");
       member.resisteredDate = getDateValue("가입일? ");
 
       members[i] = member;
@@ -40,7 +40,7 @@ public class App2 {
 
       Member member = members[i2];
       System.out.printf("%s, %s, %s, %s, %s\n", member.no, member.name, member.email,
-          member.phoneNum, member.resisteredDate);
+          member.tel, member.resisteredDate);
     }
 
   }

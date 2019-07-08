@@ -12,14 +12,14 @@ public class App3 {
 
     Board[] boards = new Board[100];
 
-
     int i = 0;
 
     for (; i < boards.length; i++) {
       Board board = new Board();
       board.no = getIntValue("번호? ");
       board.contents = getStringValue("내용? ");
-      board.createDate = getDateValue("작성일? ");
+      board.createDate = new Date(System.currentTimeMillis());
+      board.viewCount = getIntValue("조회수 ");
 
       boards[i] = board;
 
@@ -33,18 +33,8 @@ public class App3 {
 
     for (int i2 = 0; i2 <= i; i2++) {
       Board board = boards[i2];
-      System.out.printf("%s, %s, %s\n", board.no, board.contents, board.createDate);
-    }
-  }
-
-  private static Date getDateValue(String messsage) {
-    while (true) {
-      try {
-        System.out.println(messsage);
-        return java.sql.Date.valueOf(keyScan.nextLine());
-      } catch (IllegalArgumentException e) {
-        System.out.println("yyyy-MM-dd");
-      }
+      System.out.printf("%s, %s, %s\n", board.no, board.contents, board.createDate,
+          board.viewCount);
     }
   }
 
