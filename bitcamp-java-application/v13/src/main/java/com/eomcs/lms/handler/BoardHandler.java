@@ -4,11 +4,11 @@ import java.sql.Date;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.util.Input;
 
-public class BoardHandler2 {
-  private static Board[] boards = new Board[100];
-  private static int boardsSize = 0;
+public class BoardHandler {
+  private Board[] boards = new Board[100];
+  private int boardsSize = 0;
 
-  public static void addBoard() {
+  public void addBoard() {
     Board board = new Board();
 
     board.no = Input.getIntValue("번호? ");
@@ -20,7 +20,7 @@ public class BoardHandler2 {
     System.out.println("저장하였습니다.");
   }
 
-  public static void listBoard() {
+  public void listBoard() {
     for (int i = 0; i < boardsSize; i++) {
       Board board = boards[i];
 
