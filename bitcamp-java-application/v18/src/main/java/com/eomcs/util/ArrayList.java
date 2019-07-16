@@ -7,7 +7,7 @@ public class ArrayList<E> {
 
   private Object[] list;
   private int size = 0;
-
+  
   public ArrayList() {
     this(DEFAULT_CAPACITY); // 생성자에서 다른 생성자를 호출할 수 있다.
   }
@@ -46,7 +46,7 @@ public class ArrayList<E> {
       // 이 메서드에서 새 배열을 만들어야 한다.
       return (E[]) Arrays.copyOf(list, size, a.getClass()); // 세 번째 파라미터로 지정한 타입의 배열이 생성된다.
     }
-    System.arraycopy(this.list, 0, a, 0, size);
+    System.arraycopy(this.list, 0, a, 0, size); // 기존 배열에 복사
     if (a.length > size)
       a[size] = null;
     return a;
