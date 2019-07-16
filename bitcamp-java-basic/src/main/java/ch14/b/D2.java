@@ -12,4 +12,6 @@ public class D2 extends D1 {
     System.out.println("D2.m2()");
   }
   
+  
+  
 }
