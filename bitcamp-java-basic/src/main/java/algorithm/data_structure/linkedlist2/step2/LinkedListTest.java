@@ -1,8 +1,8 @@
-package com.eomcs.util;
+package algorithm.data_structure.linkedlist2.step2;
 
 public class LinkedListTest {
   public static void main(String[] args) {
-    LinkedList<String> list = new LinkedList<>();
+    LinkedList list = new LinkedList();
     list.add("aaa");
     list.add("bbb");
     list.add("ccc");
@@ -27,12 +27,6 @@ public class LinkedListTest {
     list.add("okok");
     list.add("nono");
     
-    System.out.println("---------------------");
-    
-    String[] arr = list.toArray(new String[] {});
-    for(String obj : arr) {
-      System.out.println(obj);
-    }
     
     System.out.println("----------------------");
     

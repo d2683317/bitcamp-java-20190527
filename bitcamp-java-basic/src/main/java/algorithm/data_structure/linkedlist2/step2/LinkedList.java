@@ -1,17 +1,15 @@
-// LinkedList : 목록으로 다루는 값을 특정 타입으로 제한하기 위해 제네릭(generic) 적용하기
-package com.eomcs.util;
+// LinkedList : Node 클래스를 중첩클래스(static nested class)로 만들기
+package algorithm.data_structure.linkedlist2.step2;
 
-import java.lang.reflect.Array;
-
-public class LinkedList<T> {
-  Node<T> head;
-  Node<T> tail;
+public class LinkedList {
+  Node head;
+  Node tail;
   int size = 0;
 
   public LinkedList() {}
 
-  public boolean add(T value) {
-    Node<T> temp = new Node<>(value);
+  public boolean add(Object value) {
+    Node temp = new Node(value);
     if (head == null)
       head = temp;
     if (tail != null)
@@ -22,11 +20,11 @@ public class LinkedList<T> {
     return true;
   }
 
-  public T get(int index) {
+  public Object get(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
     }
-    Node<T> node = head;
+    Node node = head;
     for (int i = 0; i < index; i++) {
       node = node.next;
     }
@@ -34,30 +32,30 @@ public class LinkedList<T> {
   }
 
   // 특정 위치의 값을 바꾼다.
-  public T set(int index, T value) {
+  public Object set(int index, Object value) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
     }
-    Node<T> node = head;
+    Node node = head;
     for (int i = 0; i < index; i++) {
       node = node.next;
     }
-    T oldVal = node.value; // 노드에 저장된 기존 값 백업
+    Object oldVal = node.value; // 노드에 저장된 기존 값 백업
     node.value = value; // 해당 노드의 값을 파라미터에서 받은 값으로 변경
     return oldVal; // 변경 전 값을 리턴
   }
 
   // 특정 위치의 값을 삭제한다.
-  public T remove(int index) {
+  public Object remove(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("인덱스가 유효하지 않습니다!");
     }
-    Node<T> deletedNode = null;
+    Node deletedNode = null;
     if (index == 0) {
       deletedNode = head;
       head = deletedNode.next;
     } else {
-      Node<T> node = head;
+      Node node = head;
       for (int i = 0; i < index - 1; i++) {
         // 삭제하려는 노드의 이전 노드까지 간다.
         node = node.next;
@@ -70,7 +68,7 @@ public class LinkedList<T> {
         tail = node; // tail 노드를 변경한다.
       }
     }
-    T oldVal = deletedNode.value; // 삭제될 노드의 값을 임시 보관한다.
+    Object oldVal = deletedNode.value; // 삭제될 노드의 값을 임시 보관한다.
     deletedNode.value = null; // 삭제될 노드가 다른 객체를 참조하지 않도록 초기화시킨다.
     deletedNode.next = null; // 이런 식으로 개발자가 메모리 관리에 기여할 수 있다.
 
@@ -89,7 +87,7 @@ public class LinkedList<T> {
 
     // 노드를 따라 가면서 삭제하기
     while (head != null) {
-      Node<T> deletedNode = head;
+      Node deletedNode = head;
       head = head.next;
       deletedNode.value = null;
       deletedNode.next = null;
@@ -105,13 +103,16 @@ public class LinkedList<T> {
 
     // LinkedList의 head에서 tail까지 반복하면서 배열에 value를 복사한다.
     // 방법1:
-    Node<T> node = head;
+    Node node = head;
     /*
-     * for (int i = 0; i < size; i++) { arr[i] = node.value; node = node.next; }
-     */
+    for (int i = 0; i < size; i++) {
+      arr[i] = node.value;
+      node = node.next;
+    }
+    */
     // 방법2:
     int i = 0;
-    while (node != null) {
+    while(node != null) {
       arr[i++] = node.value;
       node = node.next;
     }
@@ -119,32 +120,20 @@ public class LinkedList<T> {
     return arr;
   }
 
-  @SuppressWarnings("unchecked")
-  public T[] toArray(T[] a) {
-    if (a.length < size) {
-      a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
+  // LinkedList에서 사용하는 클래스라면 굳이 패키지 멤버 클래스로 만들 필요가 없다.
+  // LinkedList 안에 선언하여 중첩 클래스로 정의하는 것이
+  // 소스 코드의 유지 보수에 좋다.
+  // 외부에 직접 노출되지 않기 때문에 쓸데없는 클래스를 감추는 효과도 있다.
+  static class Node {
+    Object value;
+    Node next;
+    
+    public Node() {
     }
-
-    Node<T> node = head;
-    for (int i = 0; i < size; i++) {
-      a[i] = node.value;
-      node = node.next;
-    }
-    if (a.length > size)
-      a[size] = null;
-    return a;
-  }
-
-  // Node 객체에 보관하는 데이터의 클래스 이름을 "타입 파라미터" T에 받는다.
-  static class Node<T> {
-    T value;
-    Node<T> next;
-
-    public Node() {}
-
-    public Node(T value) {
+    
+    public Node(Object value) {
       this.value = value;
     }
   }
-
+  
 }
