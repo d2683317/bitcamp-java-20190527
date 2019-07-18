@@ -62,15 +62,15 @@ public class LinkedList {
       // 이전 노드가 가리키는 다음 노트를 다음, 다음 노드를 가리키게 한다.
       deletedNode = node.next; // 삭제될 노드를 임시 보관한다.
       node.next = deletedNode.next; // 삭제될 노드의 다음 노드를 가리킨다.
-      
-      if(deletedNode == tail) { // 삭제할 노드가 마지막 노드라면
+
+      if (deletedNode == tail) { // 삭제할 노드가 마지막 노드라면
         tail = node; // tail 노드를 변경한다.
       }
     }
     Object oldVal = deletedNode.value; // 삭제될 노드의 값을 임시 보관한다.
     deletedNode.value = null; // 삭제될 노드가 다른 객체를 참조하지 않도록 초기화시킨다.
     deletedNode.next = null; // 이런 식으로 개발자가 메모리 관리에 기여할 수 있다.
-    
+
     size--;
 
     return oldVal;
@@ -79,21 +79,35 @@ public class LinkedList {
   public int size() {
     return size;
   }
-  
+
   public void clear() {
-    if(size == 0)
+    if (size == 0)
       return;
-    
+
     // 노드를 따라 가면서 삭제하기
-    while(head != null) {
+    while (head != null) {
       Node deletedNode = head;
       head = head.next;
       deletedNode.value = null;
       deletedNode.next = null;
     }
-    
+
     tail = null;
     size = 0;
   }
 
+  public Object[] toArray() {
+    // LinkedList에 있는 데이터를 저장할 배열을 준비한다.
+    Object[] arr = new Object[size];
+    
+    // LinkedList의 head에서 tail까지 반복하면서 배열에 value를 복사한다.
+    // 방법1:
+    Node node = head;
+      for(int i = 0; i < size; i++) {
+        arr[i] = node.value;
+        node = node.next;
+    }
+    // 배열을 리턴한다.
+      return arr;
+  }
 }
