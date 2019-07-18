@@ -1,0 +1,71 @@
+package com.eomcs.lms.domain;
+
+import java.sql.Date;
+
+public class Member {
+
+  private int no;
+  private String name;
+  private String email;
+  private String pw;
+  private String photo;
+  private String tel;
+  private Date resisteredDate;
+
+  public int getNo() {
+    return no;
+  }
+
+  public void setNo(int no) {
+    this.no = no;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getPw() {
+    return pw;
+  }
+
+  public void setPw(String pw) {
+    this.pw = pw;
+  }
+
+  public String getPhoto() {
+    return photo;
+  }
+
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
+
+  public String getTel() {
+    return tel;
+  }
+
+  public void setTel(String tel) {
+    this.tel = tel;
+  }
+
+  public Date getResisteredDate() {
+    return resisteredDate;
+  }
+
+  public void setResisteredDate(Date resisteredDate) {
+    this.resisteredDate = resisteredDate;
+  }
+
+}
