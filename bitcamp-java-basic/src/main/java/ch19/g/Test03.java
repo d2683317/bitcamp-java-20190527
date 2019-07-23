@@ -24,6 +24,7 @@ public class Test03 {
     // 필터 클래스가 같은 클래스에 있어 무슨 일을 하는지 소스를 살펴보기 편하다.
     //
     String[] names = dir.list(new MyFilenameFilter());
+    
     // 
     // 만약 main() 메서드와 필터를 정의한 클래스 사이에 많은 코드가 있다면
     // 이전과 마찬가지로 역시 소스 코드를 살펴보기가 불편하다.
