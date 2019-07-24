@@ -180,6 +180,7 @@ public class LinkedList {
       this.value = value;
     }
     
+    @SuppressWarnings("unused")
     public Node(Object value, Node prev, Node next) {
       this(value);
       this.prev = prev;
