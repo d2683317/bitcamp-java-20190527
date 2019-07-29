@@ -1,10 +1,10 @@
-// 버퍼 사용(for 텍스트 파일) - 사용 후
+// 버퍼 사용(for 텍스트 파일) - 사용 전
 // 
-package ch22.c.ex1;
+package ch22.c.ex1.character_stream;
 
 import java.io.FileReader;
 
-public class Test02_2 {
+public class Test01_1 {
   public static void main(String[] args) {
     
     try {
@@ -14,10 +14,9 @@ public class Test02_2 {
       
       long start = System.currentTimeMillis();
       
-      char[] buf = new char[1024];
-      int len = 0;
+      int b;
       int count = 0;
-      while ((len = in.read(buf)) != -1) {
+      while ((b = in.read()) != -1) {
         count++;
       }
       

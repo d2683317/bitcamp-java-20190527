@@ -1,14 +1,14 @@
-// 버퍼 사용(for 텍스트 파일) - 사용 전
+// 버퍼 사용 - 사용 전
 // 
-package ch22.c.ex1;
+package ch22.c.ex1.byte_stream;
 
-import java.io.FileReader;
+import java.io.FileInputStream;
 
-public class Test02_1 {
+public class Test01_1 {
   public static void main(String[] args) {
     
     try {
-      FileReader in = new FileReader("temp/jls12.txt");
+      FileInputStream in = new FileInputStream("temp/jls12.pdf");
       
       System.out.println("데이터 읽는 중...");
       
