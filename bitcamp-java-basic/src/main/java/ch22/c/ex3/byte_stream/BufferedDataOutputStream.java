@@ -5,9 +5,9 @@ import java.io.IOException;
 import ch22.c.ex1.byte_stream.BufferedOutputStream;
 
 // 버퍼 기능을 추가하기 위해 기존에 작성한 BufferedOutputStream을 상속 받는다.
-public class DataOutputStream2 extends BufferedOutputStream {
+public class BufferedDataOutputStream extends BufferedOutputStream {
 
-  public DataOutputStream2(String name) throws FileNotFoundException {
+  public BufferedDataOutputStream(String name) throws FileNotFoundException {
     super(name);
   }
 
@@ -45,7 +45,9 @@ public class DataOutputStream2 extends BufferedOutputStream {
     writeShort(bytes.length);
 
     // 그리고 문자열의 UTF-8 코드 값이 들어 있는 바이트 배열을 출력한다.
-    write(bytes);
+    for (int i = 0; i < bytes.length; i++) {
+      write(bytes[i]);
+    }
   }
   
   public void writeBoolean(boolean value) throws IOException {
