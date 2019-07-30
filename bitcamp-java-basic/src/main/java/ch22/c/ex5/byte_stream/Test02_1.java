@@ -1,11 +1,12 @@
 // DataOutputStream + BufferedOutputStream
-package ch22.c.ex4;
+package ch22.c.ex5.byte_stream;
 
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 
 public class Test02_1 {
   public static void main(String[] args) throws Exception {
-
     // 실제 파일에 출력을 수행하는 객체를 준비한다.
     FileOutputStream other = new FileOutputStream("temp/data.bin");
 
