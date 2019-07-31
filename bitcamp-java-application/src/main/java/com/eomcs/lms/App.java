@@ -89,7 +89,7 @@ public class App {
 
     commandMap.put("/hi", new HiCommand(input));
     commandMap.put("/calc/plus", new CalcPlusCommand(input));
-
+    
     while (true) {
       String command = prompt();
 
