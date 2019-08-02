@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.Date;
 import java.util.List;
-import com.eomcs.lms.domain.Board;
+import com.eomcs.lms.domain.Lesson;
 
-public class ServerTest3 {
+public class ServerTest2 {
   static ObjectOutputStream out;
   static ObjectInputStream in;
 
@@ -21,25 +22,34 @@ public class ServerTest3 {
       System.out.println("서버와 연결되었음.......");
 
       // 다른 메서드가 입출력 객체를 사용할 수 있도록 스태틱 변수에 저장한다.
-      ServerTest3.in = in;
-      ServerTest3.out = out;
+      ServerTest2.in = in;
+      ServerTest2.out = out;
 
-      Board board = new Board();
+      Lesson lesson = new Lesson();
 
-      board.setNo(1);
-      board.setContents("제목1");
-      
+      lesson.setNo(1);
+      lesson.setTitle("자바프로그래밍");
+      lesson.setContents("okok");
+      lesson.setStartDate(Date.valueOf("2019-1-1"));
+      lesson.setEndDate(Date.valueOf("2019-1-1"));
+      lesson.setTotalHours(100);
+      lesson.setDayHours(10);
 
-      if (!add(board)) {
+      if (!add(lesson)) {
         error();
       }
       System.out.println("-------------------------");
 
-      board = new Board();
-      board.setNo(2);
-      board.setContents("제목2");
+      lesson = new Lesson();
+      lesson.setNo(2);
+      lesson.setTitle("자바프로그래밍22");
+      lesson.setContents("okok22");
+      lesson.setStartDate(Date.valueOf("2019-2-2"));
+      lesson.setEndDate(Date.valueOf("2019-2-2"));
+      lesson.setTotalHours(200);
+      lesson.setDayHours(20);
 
-      if (!add(board)) {
+      if (!add(lesson)) {
         error();
       }
       System.out.println("-------------------------");
@@ -64,11 +74,16 @@ public class ServerTest3 {
       }
       System.out.println("-------------------------");
 
-      board = new Board();
-      board.setNo(1);
-      board.setContents("변경");
+      lesson = new Lesson();
+      lesson.setNo(1);
+      lesson.setTitle("자바웹프로그래밍");
+      lesson.setContents("웹개발자 양성과정");
+      lesson.setStartDate(Date.valueOf("2019-5-27"));
+      lesson.setEndDate(Date.valueOf("2019-11-27"));
+      lesson.setTotalHours(150);
+      lesson.setDayHours(15);
 
-      if (!update(board)) {
+      if (!update(lesson)) {
         error();
       }
       System.out.println("-------------------------");
@@ -108,7 +123,7 @@ public class ServerTest3 {
 
   private static boolean delete() throws Exception {
     // 서버가 처리할 수 없는 명령어 보내기
-    out.writeUTF("/board/delete");
+    out.writeUTF("/lesson/delete");
     out.writeInt(2);
     out.flush();
     System.out.print("delete 요청함 => ");
@@ -121,7 +136,7 @@ public class ServerTest3 {
   }
 
   private static boolean detail() throws Exception {
-    out.writeUTF("/board/detail");
+    out.writeUTF("/lesson/detail");
     out.writeInt(1);
     out.flush();
     System.out.print("detail 요청함 => ");
@@ -135,8 +150,8 @@ public class ServerTest3 {
     return true;
   }
 
-  private static boolean update(Board obj) throws Exception {
-    out.writeUTF("/board/update");
+  private static boolean update(Lesson obj) throws Exception {
+    out.writeUTF("/lesson/update");
     out.writeObject(obj);
     out.flush();
     System.out.print("update 요청함 => ");
@@ -149,7 +164,7 @@ public class ServerTest3 {
   }
 
   private static boolean list() throws Exception {
-    out.writeUTF("/board/list");
+    out.writeUTF("/lesson/list");
     out.flush();
 
     System.out.print("list 요청함 => ");
@@ -160,10 +175,10 @@ public class ServerTest3 {
     System.out.println("처리 완료!");
 
     @SuppressWarnings("unchecked")
-    List<Board> list = (List<Board>) in.readObject();
+    List<Lesson> list = (List<Lesson>) in.readObject();
     System.out.println(
         "================================================================================================");
-    for (Board obj : list) {
+    for (Lesson obj : list) {
       System.out.println(obj);
     }
     System.out.println(
@@ -172,8 +187,8 @@ public class ServerTest3 {
 
   }
 
-  private static boolean add(Board obj) throws Exception {
-    out.writeUTF("/board/add");
+  private static boolean add(Lesson obj) throws Exception {
+    out.writeUTF("/lesson/add");
     out.writeObject(obj);
     out.flush();
     System.out.print("add 요청함 => ");
