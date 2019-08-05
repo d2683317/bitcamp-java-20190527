@@ -1,19 +1,21 @@
-package com.eomcs.lms.dao;
+package com.eomcs.lms.dao.csv;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
+import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 
-public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> {
+public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> implements MemberDao {
 
-  public MemberSerialDao(String file) throws ClassNotFoundException {
+  public MemberCsvDao(String file) {
     super(file);
 
     try {
       loadData();
       System.out.println("회원 데이터 로딩 완료!");
-    } catch (IOException e) {
+    } catch (Exception e) {
       System.out.println("회원 데이터 로딩 중 오류 발생!");
     }
   }
@@ -30,9 +32,28 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> {
     } catch (IOException e) {
       System.out.println("파일에 데이터를 출력하는 중에 오류 발생!");
       e.printStackTrace();
-    } 
+    }
   }
-  
+
+  @Override
+  protected Member createObject(String[] values) {
+    Member member = new Member();
+    member.setNo(Integer.parseInt(values[0]));
+    member.setName(values[1]);
+    member.setEmail(values[2]);
+    member.setPw(values[3]);
+    member.setPhoto(values[4]);
+    member.setTel(values[5]);
+    member.setResisteredDate(Date.valueOf(values[6]));
+    return member;
+  }
+
+  @Override
+  protected String createCSV(Member obj) {
+    return String.format("%d,%s,%s,%s,%s,%s,%s", obj.getNo(), obj.getName(), obj.getEmail(), obj.getPw(),
+        obj.getPhoto(), obj.getTel(), obj.getResisteredDate());
+  }
+
   @Override
   public int indexOf(Integer key) {
     int i = 0;
@@ -45,16 +66,18 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> {
     return -1;
   }
 
-
+  @Override
   public int insert(Member member) throws Exception {
     list.add(member);
     return 1;
   }
 
+  @Override
   public List<Member> findAll() throws Exception {
     return list;
   }
 
+  @Override
   public Member findBy(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
@@ -62,6 +85,7 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> {
     return list.get(index);
   }
 
+  @Override
   public int update(Member member) throws Exception {
     int index = indexOf(member.getNo());
     if (index == -1)
@@ -71,6 +95,7 @@ public class MemberSerialDao extends AbstractDataSerializer<Member, Integer> {
     return 1;
   }
 
+  @Override
   public int delete(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)

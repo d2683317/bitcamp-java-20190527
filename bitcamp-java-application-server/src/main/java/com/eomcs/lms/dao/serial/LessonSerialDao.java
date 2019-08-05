@@ -1,29 +1,28 @@
-package com.eomcs.lms.dao.csv;
+package com.eomcs.lms.dao.serial;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
 
-public class LessonCsvDao extends AbstractCsvDataSerializer<Lesson, Integer> implements LessonDao {
-
-  public LessonCsvDao(String file) {
+public class LessonSerialDao extends AbstractDataSerializer<Lesson, Integer> implements LessonDao {
+  
+  public LessonSerialDao(String file) throws ClassNotFoundException {
     super(file);
-
+    
     try {
       loadData();
       System.out.println("수업 데이터 로딩 완료!");
-    } catch (Exception e) {
+    } catch (IOException e) {
       System.out.println("수업 데이터 로딩 중 오류 발생!");
     }
   }
-
+  
   @Override
   public void saveData() {
     try {
-      super.saveData();
+        super.saveData();
       System.out.println("수업 데이터 저장 완료!");
 
     } catch (FileNotFoundException e) {
@@ -32,28 +31,9 @@ public class LessonCsvDao extends AbstractCsvDataSerializer<Lesson, Integer> imp
     } catch (IOException e) {
       System.out.println("파일에 데이터를 출력하는 중에 오류 발생!");
       e.printStackTrace();
-    }
+    } 
   }
-
-  @Override
-  protected Lesson createObject(String[] values) {
-    Lesson lesson = new Lesson();
-    lesson.setNo(Integer.parseInt(values[0]));
-    lesson.setTitle(values[1]);
-    lesson.setContents(values[2]);
-    lesson.setStartDate(Date.valueOf(values[3]));
-    lesson.setEndDate(Date.valueOf(values[4]));
-    lesson.setTotalHours(Integer.parseInt(values[5]));
-    lesson.setDayHours(Integer.parseInt(values[6]));
-    return lesson;
-  }
-
-  @Override
-  protected String createCSV(Lesson obj) {
-    return String.format("%d,%s,%s,%s,%s,%d,%d", obj.getNo(), obj.getTitle(), obj.getContents(),
-        obj.getStartDate(), obj.getEndDate(), obj.getTotalHours(), obj.getDayHours());
-  }
-
+  
   @Override
   public int indexOf(Integer key) {
     int i = 0;
@@ -71,12 +51,12 @@ public class LessonCsvDao extends AbstractCsvDataSerializer<Lesson, Integer> imp
     list.add(lesson);
     return 1;
   }
-
+  
   @Override
   public List<Lesson> findAll() throws Exception {
     return list;
   }
-
+  
   @Override
   public Lesson findBy(int no) throws Exception {
     int index = indexOf(no);
@@ -84,25 +64,25 @@ public class LessonCsvDao extends AbstractCsvDataSerializer<Lesson, Integer> imp
       return null;
     return list.get(index);
   }
-
+  
   @Override
   public int update(Lesson lesson) throws Exception {
     int index = indexOf(lesson.getNo());
     if (index == -1)
       return 0;
-
+    
     list.set(index, lesson);
     return 1;
   }
-
+  
   @Override
   public int delete(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
       return 0;
-
+    
     list.remove(index);
     return 1;
   }
-
+  
 }

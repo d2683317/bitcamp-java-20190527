@@ -4,9 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 
-public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> {
+public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> implements MemberDao {
 
   public MemberCsvDao(String file) {
     super(file);
@@ -65,16 +66,18 @@ public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> {
     return -1;
   }
 
-
+  @Override
   public int insert(Member member) throws Exception {
     list.add(member);
     return 1;
   }
 
+  @Override
   public List<Member> findAll() throws Exception {
     return list;
   }
 
+  @Override
   public Member findBy(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
@@ -82,6 +85,7 @@ public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> {
     return list.get(index);
   }
 
+  @Override
   public int update(Member member) throws Exception {
     int index = indexOf(member.getNo());
     if (index == -1)
@@ -91,6 +95,7 @@ public class MemberCsvDao extends AbstractCsvDataSerializer<Member, Integer> {
     return 1;
   }
 
+  @Override
   public int delete(int no) throws Exception {
     int index = indexOf(no);
     if (index == -1)
