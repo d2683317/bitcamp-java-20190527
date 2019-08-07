@@ -147,7 +147,7 @@ public class App {
       out.flush();
 
     } catch (Exception e) {
-      // 서버를 종료하는 요청을 보낸 후 발생하는 예외는 무시하낟.
+      // 서버를 종료하는 요청을 보낸 후 발생하는 예외는 무시한다.
     }
   }
 
