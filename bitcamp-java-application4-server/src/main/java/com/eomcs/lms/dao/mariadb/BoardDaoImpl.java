@@ -38,7 +38,7 @@ public class BoardDaoImpl implements BoardDao {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setContents(rs.getString("conts"));
-        board.setCreateDate(rs.getDate("cdt"));
+        board.setCreatedDate(rs.getDate("cdt"));
         board.setViewCount(rs.getInt("vw_cnt"));
 
         list.add(board);
@@ -57,7 +57,7 @@ public class BoardDaoImpl implements BoardDao {
         Board board = new Board();
         board.setNo(rs.getInt("board_id"));
         board.setContents(rs.getString("conts"));
-        board.setCreateDate(rs.getDate("cdt"));
+        board.setCreatedDate(rs.getDate("cdt"));
         board.setViewCount(rs.getInt("vw_cnt"));
 
         // 게시글을 찾았으면 조회수를 증가시킨다.

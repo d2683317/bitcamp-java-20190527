@@ -20,7 +20,7 @@ public class BoardListCommand implements Command {
       List<Board> boards = boardDao.findAll();
       for (Board board : boards) {
         out.printf("%s, %s, %s, %d\n", board.getNo(), board.getContents(),
-            board.getCreateDate(), board.getViewCount());
+            board.getCreatedDate(), board.getViewCount());
       }
     } catch (Exception e) {
       out.println("데이터 목록 조회 실패!");

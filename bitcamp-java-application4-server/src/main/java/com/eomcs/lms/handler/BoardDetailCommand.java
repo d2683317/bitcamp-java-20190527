@@ -28,7 +28,7 @@ public class BoardDetailCommand implements Command {
       }
       
       out.printf("내용: %s\n", board.getContents());
-      out.printf("작성일: %s\n", board.getCreateDate());
+      out.printf("작성일: %s\n", board.getCreatedDate());
       
     } catch (Exception e) {
       out.println("데이터 조회에 실패!!");
