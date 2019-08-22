@@ -8,7 +8,7 @@
 ## 주요 용어 p.76
 - table(relation; entity; file)
 - intension(schema; header) => 데이터 구조 설계도
-- extension(instance; data) => 데이터
+- extension(instance; data) => 데이터 
 - row(tuple; record) => 데이터(여러 컬럼으로 이루어진) 한 개. 예) 학생
 - column(attribute; field) => 데이터의 한 항목. 예) 이름, 학번, 전화번호
 
