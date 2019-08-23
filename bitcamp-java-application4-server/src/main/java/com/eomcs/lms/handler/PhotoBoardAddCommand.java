@@ -2,25 +2,42 @@ package com.eomcs.lms.handler;
 
 import java.io.BufferedReader;
 import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import com.eomcs.lms.dao.PhotoBoardDao;
 import com.eomcs.lms.dao.PhotoFileDao;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
+import com.eomcs.util.ConnectionFactory;
 import com.eomcs.util.Input;
 
 public class PhotoBoardAddCommand implements Command {
 
+  private ConnectionFactory conFactory;
   private PhotoBoardDao photoBoardDao;
   private PhotoFileDao photoFileDao;
 
-  public PhotoBoardAddCommand(PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+  public PhotoBoardAddCommand(ConnectionFactory conFactory, PhotoBoardDao photoBoardDao, PhotoFileDao photoFileDao) {
+    this.conFactory = conFactory;
     this.photoBoardDao = photoBoardDao;
     this.photoFileDao = photoFileDao;
   }
 
   @Override
   public void execute(BufferedReader in, PrintStream out) {
+    Connection con = null;
+
     try {
+      // DAO에게 작업을 시키기 전에 커넥션 팩토리로 부터 커넥션을 얻는다.
+      // => 그러면 커넥션 팩토리는 스레드 주머니에 커넥션을 담아 둘 것이다.
+      // => 그 이후에 DAO가 커넥션 팩토리에게 커넥션을 요구하면 
+      //    바로 이 스레드 주머니에 들어 있는 커넥션 객체를 리턴할 것이다.
+      // => 따라서 이 메서드가 끝날 때 까지 DAO는 같은 커넥션을 사용할 것이다.
+      //
+      con = conFactory.getConnection();
+
+      // DAO가 사용할 커넥션에 대해 AutoCommit을 false로 설정한다.
+      con.setAutoCommit(false);
 
       PhotoBoard photoBoard = new PhotoBoard();
       photoBoard.setTitle(Input.getStringValue(in, out, "제목? "));
@@ -49,12 +66,16 @@ public class PhotoBoardAddCommand implements Command {
         photoFileDao.insert(photoFile);
         count++;
       }
+
+      con.commit();
       out.println("저장하였습니다.");
 
     } catch (Exception e) {
+      try {con.rollback();} catch (Exception e2) {}
       out.println("데이터 저장에 실패했습니다!");
       System.out.println(e.getMessage());
-
+    } finally {
+      try {con.setAutoCommit(true);} catch (SQLException e) {}
     }
   }
 

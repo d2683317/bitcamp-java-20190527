@@ -1,4 +1,4 @@
-// v39_1 : DB 커넥션 관리자 도입
+// v40_1 : 스레드 전용 커넥션 객체 사용하기(스레드 로컬 문법 적용) + 트랜잭션 처리
 package com.eomcs.lms;
 
 import java.io.BufferedReader;
@@ -49,9 +49,8 @@ public class App {
 
   HashMap<String, Command> commandMap = new HashMap<>();
   int state;
-
-  // 스레드 풀
   ExecutorService executorService = Executors.newCachedThreadPool();
+  ConnectionFactory conFactory;
 
   public App() throws Exception {
 
@@ -60,7 +59,7 @@ public class App {
 
     try {
       // 커넥션 관리자를 준비한다.
-      ConnectionFactory conFactory = new ConnectionFactory("org.mariadb.jdbc.Driver",
+      conFactory = new ConnectionFactory("org.mariadb.jdbc.Driver",
           "jdbc:mariadb://localhost/bitcampdb", "bitcamp", "1111");
 
       // Command 객체가 사용할 데이터 처리 객체를 준비한다.s
@@ -90,7 +89,8 @@ public class App {
       commandMap.put("/board/list", new BoardListCommand(boardDao));
       commandMap.put("/board/update", new BoardUpdateCommand(boardDao));
 
-      commandMap.put("/photoboard/add", new PhotoBoardAddCommand(photoBoardDao, photoFileDao));
+      commandMap.put("/photoboard/add",
+          new PhotoBoardAddCommand(conFactory, photoBoardDao, photoFileDao));
       commandMap.put("/photoboard/delete",
           new PhotoBoardDeleteCommand(photoBoardDao, photoFileDao));
       commandMap.put("/photoboard/detail",
@@ -180,6 +180,13 @@ public class App {
 
       } catch (Exception e) {
         System.out.println("클라이언트와 통신 오류!");
+        
+      } finally {
+        // 현재 스레드가 클라이언트 요청을 처리했으면 (정상처리든 오류가 발생했든)
+        // 현재 스레드에 보관된 커넥션 객체를 제거해야 한다.
+        // 그래야만 다음 클라이언트 요청이 들어 왔을 때
+        // 새 커넥션 객체를 사용할 것이다.
+        conFactory.clearConnection();
       }
     }
   }
