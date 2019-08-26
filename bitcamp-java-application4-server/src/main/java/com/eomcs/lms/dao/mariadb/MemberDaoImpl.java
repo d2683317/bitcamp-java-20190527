@@ -64,7 +64,8 @@ public class MemberDaoImpl implements MemberDao {
   @Override
   public Member findBy(int no) throws Exception {
     try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement("select * from lms_member where member_id=?")) {
+        PreparedStatement stmt = con.prepareStatement(
+            "select * from lms_member where member_id=?")) {
       stmt.setInt(1, no);
 
       try (ResultSet rs = stmt.executeQuery()) {
@@ -121,7 +122,9 @@ public class MemberDaoImpl implements MemberDao {
   @Override
   public int update(Member member) throws Exception {
     try (Connection con = dataSource.getConnection();
-        PreparedStatement stmt = con.prepareStatement("update lms_member set name=?, email=?, pwd=password(?), tel=?, photo=? where member_id=?")) {
+        PreparedStatement stmt = con.prepareStatement(
+            "update lms_member set name=?, email=?, pwd=password(?), tel=?, photo=?"
+            + " where member_id=?")) {
 
       stmt.setString(1, member.getName());
       stmt.setString(2, member.getEmail());
