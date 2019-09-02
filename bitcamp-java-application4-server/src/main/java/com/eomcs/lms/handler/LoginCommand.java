@@ -9,7 +9,7 @@ import com.eomcs.util.Component;
 import com.eomcs.util.Input;
 import com.eomcs.util.RequestMapping;
 
-@Component("/auth/login")
+@Component
 public class LoginCommand {
 
   private MemberDao memberDao;
@@ -18,7 +18,7 @@ public class LoginCommand {
     this.memberDao = memberDao;
   }
 
-  @RequestMapping
+  @RequestMapping("/auth/login")
   public void execute(BufferedReader in, PrintStream out) {
     try {
       HashMap<String,Object> params = new HashMap<>();
