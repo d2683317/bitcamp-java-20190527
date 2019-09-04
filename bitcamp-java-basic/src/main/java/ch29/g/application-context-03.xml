@@ -41,6 +41,17 @@
          개발자가 직접 객체를 생성할 필요가 없다는 것이다.-->
     <property name="createdDate" value="2019-3-19"/>
   </bean>
+  <!-- 
+    CustomerEditorConfigurer configurer = beanContainer.getBean(CustomEditorConfigurer);
+    Map<Class,Class> map = configurer.getCustomEditors();
+    Class editorClass = map.get(Date.class);
+    Constructor const = editorClass.getConstructor();
+    PropertyEditor propEditor = const.newInstance(); // MyCustomDateEditor 리턴
+    propEditor.setAsText("2019-3-19");
+    Date value = propEditor.getValue();
+    
+    c1.setCreatedDate(value);
+   -->
   
 </beans>
 
