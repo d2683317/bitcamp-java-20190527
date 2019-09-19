@@ -11,16 +11,16 @@
 <pre>
 1) 웹브라우저 ==> 서블릿 컨테이너 
    - JSP 실행 요청
-     예) http://localhost:8080/java-web/jsp/ex01.jsp
+     예) http://localhost:8888/bitcamp-java-web/jsp/ex01.jsp
 2) 서블릿 컨테이너가 실행
    2.1 JSP의 서블릿 객체를 찾는다
    2.2 있으면,
-     2.2.1 그 서블릿 객체를 호출한다.
+     2.2.1 그 서블릿 객체를 호출한다. service() ---> _jspService()
    2.3 없으면,
      2.3.1 JSP 엔진을 이용하여 JSP 파일을 가지고 서블릿 자바 소스 파일을 생성한다.
      2.3.2 자바 컴파일러를 이용하여 소스 파일을 컴파일 한다.
-     2.3.3 서블릿 객체를 생성한다. - init() 호출
-     2.3.4 그 서블릿 객체를 호출한다. - service() 호출
+     2.3.3 서블릿 객체를 생성한다. - init() 호출 ---> jspInit()
+     2.3.4 그 서블릿 객체를 호출한다. - service() 호출 ---> _jspService()
    2.4 JSP 파일이 변경된 상태라면,
      2.4.1 다시 "2.3"을 반복한다.
 3) 서블릿 컨테이너 ==> 웹브라우저 
@@ -44,7 +44,7 @@ JSP 공부법
 
 JSP 실행을 요청하기
 - JSP 파일이 있는 위치를 지정한다.
-  예) http://localhost:8080/java-web/jsp/ex01.jsp
+  예) http://localhost:8888/bitcamp-java-web/jsp/ex01.jsp
 
 JSP를 변경한 후 실행을 요청하기
 - 그냥 JSP 파일이 있는 위치를 지정하면 된다.

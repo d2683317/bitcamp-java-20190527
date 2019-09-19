@@ -36,7 +36,7 @@
  --%>
 
 <%
-// type 속성에서 제레릭으로 String을 지정했기 때문에 항목의 타입을 String으로 선언할 수 있다.
+// type 속성에서 제네릭으로 String을 지정했기 때문에 항목의 타입을 String으로 선언할 수 있다.
 for (String n : list) {
   out.println(n + "<br>");
 }
