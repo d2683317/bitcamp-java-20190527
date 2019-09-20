@@ -33,7 +33,7 @@
 <%
     } else {
 %>
-     <a href='/member/detail?no=<%=loginUser.getNo()%>'><%=loginUser.getName()%></a>
+     <a href='/member/detail?no=${loginUser.no}'>${loginUser.name}</a>
      <a href='/auth/logout' class='btn btn-outline-dark btn-sm'>로그아웃</a>
 <%
     } 
