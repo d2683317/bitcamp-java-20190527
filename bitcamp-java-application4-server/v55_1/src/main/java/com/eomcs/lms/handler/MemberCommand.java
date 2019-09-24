@@ -26,7 +26,7 @@ public class MemberCommand {
     out.println("<body><h1>회원 등록폼</h1>");
     out.println("<form action='/member/add'>");
     out.println("이름:<input type='text' name='name'><br>");
-    out.println("이메일:<input type='text' name='email'><br>");
+    out.println("이메일:<input type='text' name='email'><br>")
     out.println("암호:<input type='text' name='password'><br>\n");
     out.println("사진:<input type='text' name='photo'><br>\n");
     out.println("전화:<input type='text' name='tel'><br>\n");
