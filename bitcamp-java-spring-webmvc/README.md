@@ -57,12 +57,36 @@
 - Spring WebMVC의 WebApplicationInitializer를 이해하기 위한 기반 기술 소개.
 - bitcamp-java-web-library 프로젝트 준비
 - 자세한 것은 해당 프로젝트의 README.md 파일을 읽어 볼 것.
+- bitcamp-java-spring-webmvc/lib 폴더 생성
+  - bitcamp-java-web-library/.jar 파일 넣기
+- build.gradle 에 lib 폴더에 있는 .jar 파일을 의존 라이브러리에 추가하기
+- MyWebInitializerImpl 클래스 생성
+  -이 클래스에서 DisPatcherServlet 서블릿 등록하기
+- web.xml 변경
+- DispatcherServlet 배치 정보 삭제
 
 ## src.09 : web.xml 대신 WebApplicationInitializer 구현체에서 DispatcherServlet 등록하기
 
+- build.gradle 변경
+  - 기존에 테스트를 위해 포함했던 bitcamp-java-web-library.jar 파일 제거
 - WebApplicationInitializerImpl 클래스 생성
-- web.xml 변경
-  - DispatcherServlet 배치 정보 삭제
+  - 직접 IoC 컨테이너 준비
+  - DispatcherServlet 생성
+  - ServletContext를 통해 배치
+  
+## src.10 : web.xml 대신 WebApplicationInitializer 구현체에서 DispatcherServlet 등록하기 II
+
+- WebApplicationInitializerImpl 클래스 변경
+  - 직접 인터페이스를 구현하는 대신에 추상 클래스를 상속 받아 적절한 메서드를 오버라이딩 한다.
+  - AbstracAnnotationConfigtDispatcherServletInitializer 클래스를 상속 받기
+  
+## src.11 : web.xml 대신 WebApplicationInitializer 구현체에서 DispatcherServlet 등록하기 III
+
+- WebApplicationInitializerImpl 클래스 변경
+  - 직접 인터페이스를 구현하는 대신에 추상 클래스를 상속 받아 적절한 메서드를 오버라이딩 한다.
+  - AbstractDispatcherServletInitializer 클래스를 상속 받기
+  
+## src.12 : 
 
 ## src03 : Spring Web MVC 설정하기 - Java config 설정
 
