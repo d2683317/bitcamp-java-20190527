@@ -3,7 +3,6 @@ package bitcamp.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -17,7 +16,7 @@ import bitcamp.app2.Controller04_1_Interceptor4;
 @ComponentScan("bitcamp.app2")
 // => 지정된 패키지를 뒤져서 @Component, @Controller 등이 붙은 클래스에 대해 인스턴스를 생성한다.
 
-@EnableWebMvc
+//@EnableWebMvc
 // => Web MVC 관련 객체를 등록하고 설정한다.
 // => WebMvcConfigurer 구현체를 찾아 메서드를 호출한다.
 //
