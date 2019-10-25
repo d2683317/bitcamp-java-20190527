@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>exam</title>
+  <link rel="stylesheet" href="../node_modules/jquery-ui-dist/jquery-ui.css">
+  <style>
+  #dialog {
+    display: none; 
+  }   
+  </style>
+</head>
+<body>
+  <h1>Handlebars 사용법 1</h1>
+  <button id="btn1" type="button">데이터를 가져와서 출력하기</button>
+<div id="d1"></div>
+
+<script src="../node_modules/handlebars/dist/handlebars.min.js"></script>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+var data = {
+  no:1, 
+  title:"제목1", 
+  writer:"홍길동"
+};
+
+var html = "번호: " + data.no + "<br>" +
+"제목: " + data.title + "<br>" +
+"작성자: " + data.writer + "<br>";
+
+$('#btn1').click(() => {
+  alert(html)
+});
+
+</script>
+
+</body>
+</html>
