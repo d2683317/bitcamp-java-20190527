@@ -13,7 +13,7 @@
 > alter user 'root'@'localhost' identified by '1111';
 
 ## MySQL 사용자 추가
-> CREATE USER '사용자아이디'@'서버주소' IDENTIFIED BY '암호';
+> CREATE USER 'chopchop'@'localhost' IDENTIFIED BY '1111';
 
 로컬에서만 접속할 수 있는 사용자를 만들기:
 > CREATE USER 'study'@'localhost' IDENTIFIED BY '1111';
@@ -33,13 +33,13 @@
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
 
-> CREATE DATABASE studydb
+> CREATE DATABASE chopdb
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
   
 ## MySQL 사용자에게 데이터베이스 사용 권한 부여
 > GRANT ALL ON 데이터베이스명.* TO '사용자아이디'@'서버주소';
-> GRANT ALL ON studydb.* TO 'study'@'localhost';
+> GRANT ALL ON chopdb.* TO 'chopchop'@'localhost';
 
 ## 데이터베이스 목록 조회
 > show databases;
